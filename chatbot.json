@@ -1,0 +1,548 @@
+{
+  "intents": [
+    {
+      "intent": "info_matricula",
+      "examples": [
+        {
+          "text": "como funciona o processo seletivo"
+        },
+        {
+          "text": "como me inscrevo"
+        },
+        {
+          "text": "como posso me matricular"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "pedir-informações",
+      "examples": [
+        {
+          "text": "como é"
+        },
+        {
+          "text": "como funciona"
+        },
+        {
+          "text": "me explique"
+        },
+        {
+          "text": "o que é"
+        },
+        {
+          "text": "pode me informar"
+        },
+        {
+          "text": "quais são"
+        },
+        {
+          "text": "qual a"
+        },
+        {
+          "text": "quero saber"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "saber-coordenador",
+      "examples": [
+        {
+          "text": "quem é"
+        },
+        {
+          "text": "quem é o coordenador"
+        },
+        {
+          "text": "quem é o responsável"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "saber-custo",
+      "examples": [
+        {
+          "text": "mensalidade"
+        },
+        {
+          "text": "qual o preço"
+        },
+        {
+          "text": "qual o valor"
+        },
+        {
+          "text": "quanto custa"
+        },
+        {
+          "text": "quanto é"
+        },
+        {
+          "text": "tem desconto"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "saber-duração",
+      "examples": [
+        {
+          "text": "como o curso é estruturado"
+        },
+        {
+          "text": "qual a duração"
+        },
+        {
+          "text": "quanto tempo dura"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "saber-periodo",
+      "examples": [
+        {
+          "text": "é integral"
+        },
+        {
+          "text": "qual o horário"
+        },
+        {
+          "text": "qual o período"
+        },
+        {
+          "text": "tem de noite"
+        },
+        {
+          "text": "tem noturno"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "area",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "INTELIGÊNCIA ARTIFICIAL APLICADA À AUTOMAÇÃO E ROBÓTICA",
+          "synonyms": [
+            "automação",
+            "automação e robótica",
+            "ia",
+            "inteligencia artificial"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "NANOELETRÔNICA E CIRCUITOS INTEGRADOS",
+          "synonyms": [
+            "circuitos integrados",
+            "nanoeletronica"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "PROCESSAMENTO DE SINAIS E IMAGENS",
+          "synonyms": [
+            "processamento de imagens",
+            "processamento de sinais"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "programa",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Doutorado",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Mestrado",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Pós-graduação",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": []
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "bem_vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "digress_in": "does_not_return",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_8_1633384467409",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1632962860473",
+      "event_name": "focus",
+      "dialog_node": "handler_2_1632962860474",
+      "previous_sibling": "handler_5_1632962860474"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1632962860473",
+      "context": {
+        "programa": "@programa"
+      },
+      "conditions": "@programa",
+      "event_name": "input",
+      "dialog_node": "handler_5_1632962860474"
+    },
+    {
+      "type": "standard",
+      "title": "pedir_info_nanoeletro",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Uma das áreas mais importantes dentro da Engenharia Elétrica é a área de Nanoeletrônica e Circuitos Integrados. Essa área vem recebendo os mais altos níveis de investimentos mundiais. Ela é considerada a base para as demais ciências e é responsável por fornecer os insumos básicos (circuitos integrados) para a fabricação de equipamentos eletrônicos das mais diversas áreas do conhecimento, objetivando a melhoria da qualidade de vida do ser humano.\n\nO desenvolvimento da área de Nanoeletrônica constitui atualmente uma das maiores preocupações da sociedade brasileira, pois observa-se um crescente déficit na balança comercial decorrente da importação de componentes eletrônicos para a fabricação de diversos equipamentos de interesse, tais como equipamentos eletrônicos embarcados (carro, trem, navio, avião e aeronave espacial), médicos (marca-passo e ressonância magnética), de comunicações analógica e digital (telefone celular e intercomunicador), de automação residencial, predial e industrial (alarme, controlador de elevador e robô), entretenimento (videogame, rádio e televisão digital) e computadores pessoais e industriais. Uma das razões para a não existência de empresas nacionais nesta área é a pequena quantidade de profissionais com formação especializada, capazes de atuar neste ramo industrial.\n\nDentro deste contexto, os cursos de Mestrado e Doutorado propostos visam permitir que engenheiros e profissionais de áreas afins busquem capacitação em nível de pós-graduação stricto-sensu na área de Nanoeletrônica, com especial ênfase para as linhas de pesquisa em caracterização elétrica de dispositivos eletrônicos, simulação e modelagem analítica de dispositivos eletrônicos, e projeto de circuitos integrados dedicados, melhorando a qualidade da mão-de-obra nacional nestas áreas de concentração e dando suporte ao surgimento de empresas de pequeno porte especializadas no projeto de circuitos integrados. Os profissionais voltados para estudos de falhas em circuitos eletrônicos podem também se beneficiar do programa de pós-graduação proposto, uma vez que o mesmo possui como uma de suas áreas principais a caracterização elétrica de componentes eletrônicos, permitindo a identificação de falhas e o estudo detalhado das componentes físicas que originaram a falha."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#pedir-informações && @area:(NANOELETRÔNICA E CIRCUITOS INTEGRADOS)",
+      "dialog_node": "node_1_1632963171511",
+      "previous_sibling": "node_1_1633386015182"
+    },
+    {
+      "type": "standard",
+      "title": "algo_mais",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Posso ajudar em algo mais?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "dialog_node": "node_1_1633386015182",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "pedir_info_proc",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Com os avanços tecnológicos em diversas áreas do conhecimento humano, há uma necessidade cada vez maior de extrair e processar eficientemente a informação relevante contida em um conjunto de dados ou sinais disponíveis.\n\nProcessamento de sinais é um campo multidisciplinar da Engenharia Elétrica que tem grande interseção com ciências básicas, como a Física e a Matemática. É também essencial para integrar as contribuições das engenharias e disciplinas científicas no projeto de sistemas complexos que interagem com os seres humanos, dispositivos, máquinas e o meio ambiente, tanto como uma ferramenta fundamental, devido aos sinais envolvidos, mas também como impulsionadora de novas metodologias de pesquisa aplicada. Um dos exemplos é o reconhecimento automático e síntese de fala, que permite a interação de pessoas com necessidades especiais com dispositivos artificiais e com outras pessoas. Adicionalmente, a utilização de processamento de imagens médicas, bem como o desenvolvimento de técnicas capazes de otimizar o tempo de processamento destas imagens, têm auxiliado no diagnóstico de doenças, assim como o uso de biopotenciais humanos.\n\nNesta área são explorados aspectos de processamento de sinais aplicados a reconhecimento de padrões em estatística, biometria, processamento de imagens, visão computacional, identificação de sinais sonoros de voz e fala, além de processamento e análise de biopotenciais."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#pedir-informações && @area:(PROCESSAMENTO DE SINAIS E IMAGENS)",
+      "dialog_node": "node_4_1632963334803",
+      "previous_sibling": "node_5_1632963295946"
+    },
+    {
+      "type": "standard",
+      "title": "saber_quanto_custa",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O valor da mensalidade do programa de Doutorado e de Mestrado é de R$ 2.265,00."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#saber-custo",
+      "dialog_node": "node_4_1632965071510",
+      "previous_sibling": "node_7_1632964470543"
+    },
+    {
+      "type": "standard",
+      "title": "saber_quem_coordena_o_programa",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O coordenador do Programa de Pós-Graduação Stricto Sensu em Engenharia Elétrica da FEI é o Profº. Drº. Carlos Eduardo Thomaz."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#saber-coordenador",
+      "dialog_node": "node_4_1633384431290",
+      "previous_sibling": "node_7_1632964981885"
+    },
+    {
+      "type": "standard",
+      "title": "pedir_info_ia",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Há uma crescente demanda por profissionais altamente qualificados nas áreas de automação, sistemas inteligentes e principalmente na área de robótica autônoma e móvel. A importância do desenvolvimento científico e da capacitação tecnológica nessas áreas fica evidente quando se analisa a necessidade crescente da sociedade e da indústria por robôs cada vez mais autônomos e inteligentes, e da automação de processos orientados por uma produção sob demanda. A área de concentração em Inteligência Artificial Aplicada à Automação e Robótica visa desenvolver competência e pesquisa científica em novas tecnologias nas seguintes áreas:\n\nRACIOCÍNIO AUTOMÁTICO E APRENDIZADO DE MÁQUINA\nAs áreas de aprendizado de máquina e raciocínio automático para tomada de decisões estão se tornando cada vez mais comuns nos novos desenvolvimentos tecnológicos, seja pela aplicação de técnicas tradicionais ou as novas tendências de Deep Learning. Nesta linha de pesquisa, enfatiza-se a investigação científica e o desenvolvimento de técnicas computacionais que englobem os seguintes tópicos: Representação de Conhecimento; Raciocínio Espacial; Raciocínio Qualitativo; Programação em Lógica; Redes Neurais Artificias e Deep Learning; Raciocínio Baseado em Casos; Visão Computacional; Aprendizado por Reforço; Representação do Conhecimento; Ontologia; Algoritmos Evolutivos e Bioinspirados; Robótica Cognitiva; Tomada de Decisões; Linguística Computacional; Modelagem de processos Markovianos e Redes Bayesianas.\n\nROBÓTICA INTELIGENTE\nA robótica móvel, autônoma e inteligente está se tornando cada vez mais influente e importante na sociedade atual. Seja para novos processos agrícolas, segurança, limpeza, saúde, transporte, interação com as pessoas ou até mesmo para entretenimento, a robótica móvel inteligente está transformando a sociedade que conhecemos. E para que esta transformação seja feita de forma adequada, pesquisas cientificas e avanços tecnológicos precisam ser desenvolvidos. Portanto, esta linha de pesquisa visa atuar nos seguintes tópicos: Interação Humano-Robô; Sistemas Colaborativos Inteligentes; Robótica Humanóide; Robótica Educacional; Robótica Móvel; Robótica Colaborativa; Sistemas Multi-robôs e distribuídos; Sistema heterogêneos; Veículos Autônomos Inteligentes.\n\nSISTEMAS INTELIGENTES E INTERATIVOS\nAs tecnologias inteligentes estão, a cada dia, mais próximas do ser humano, que de modo interativo, usa ou usufrui destes sistemas para resolver problemas ou atingir determinados objetivos. As pesquisas que envolvem a interação entre o homem e as máquinas (computadores, robôs, carros autônomos ou casas inteligentes) se tornam, portanto, cruciais para o desenvolvimento e o avanço dessas tecnologias para novos patamares onde as máquinas podem tomar decisões ou atuarem junto com o ser humano em seu dia-a-dia. Com isso, esta linha de pesquisa tem como foco o desenvolvimento de metodologias, técnicas, modelos e algoritmos nos seguintes tópicos: Interação humano-Computador; Interface Adaptativa; Interface Cérebro-Computador; Planejamento; Automação Residencial e Predial inteligente; Sistemas Autônomos; Internet das Coisas (IOT)."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#pedir-informações && @area:(INTELIGÊNCIA ARTIFICIAL APLICADA À AUTOMAÇÃO E ROBÓTICA)",
+      "dialog_node": "node_5_1632963295946",
+      "previous_sibling": "node_1_1632963171511"
+    },
+    {
+      "type": "standard",
+      "title": "pedir_info_duração_doutorado",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O Curso de Doutorado demandará um total de 44 unidades de créditos em disciplinas e atividades programadas, compreendendo:\n- 4 disciplinas (16 créditos), preferencialmente cursadas no primeiro, segundo e terceiro quadrimestres acadêmicos;\n- 4 unidades de crédito atribuídas à apresentação e aprovação do Exame de Qualificação pela Banca Examinadora;\n- 24 unidades de crédito atribuídas à Defesa Pública e aprovação pela Banca Examinadora da Tese de Doutorado, totalizando os 44 créditos mínimos requeridos."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#saber-duração && @programa:Doutorado",
+      "dialog_node": "node_7_1632964470543",
+      "previous_sibling": "node_8_1632963768035"
+    },
+    {
+      "type": "standard",
+      "title": "saber_periodo_do_curso",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Os cursos de Mestrado e Doutorado são projetados tanto para alunos em tempo integral (com possibilidade de bolsas CAPES, CNPq, FAPESP e Institucional), como para profissionais que atuam no mercado de trabalho, com disciplinas em período noturno."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#saber-periodo",
+      "dialog_node": "node_7_1632964981885",
+      "previous_sibling": "node_4_1632965071510"
+    },
+    {
+      "type": "standard",
+      "title": "pedir_infos_basicas",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O Programa de Pós-Graduação Stricto Sensu em Engenharia Elétrica da FEI tem como objetivo formar docentes e pesquisadores, nos níveis de Mestrado e Doutorado, com conhecimento científico nas seguintes áreas de concentração: Nanoeletrônica e Circuitos Integrados, Inteligência Artificial Aplicada à Automação e Robótica e Processamento de Sinais e Imagens\n\nMais especificamente, o programa visa:\n- Promover e desenvolver a pesquisa aplicada em Microeletrônica, Automação e Processamento de Sinais, incentivando produções intelectuais e tecnológicas e a disseminação dessas produções em periódicos e congressos nacionais/internacionais de relevância científica para a área de Engenharia Elétrica;\n- Constituir grupos de pesquisas e desenvolvimento de alto nível científico, capazes de propor soluções inovadoras para problemas encontrados na indústria e na academia relacionados, por exemplo, com projeto de circuitos dedicados (digitais e analógicos), caracterização elétrica de dispositivos eletrônicos, automação de processos industriais, robotização, sistemas inteligentes, reconhecimento de padrões e processamento digital de sinais;\n- Capacitar recursos humanos para a docência em Microeletrônica, Inteligência Artificial, Robótica e Processamento de Sinais, melhorando a qualidade do ensino superior nessas áreas de interesse, principalmente na região do Grande ABC."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#pedir-informações && @programa",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_8_1632359100036",
+      "previous_sibling": "node_4_1632963334803"
+    },
+    {
+      "type": "standard",
+      "title": "pedir_info_duração_mestrado",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O Curso de Mestrado demandará um total de 40 unidades de crédito em disciplinas e atividades programadas obrigatórias, compreendendo:\n- 6 disciplinas (24 créditos), prefencialmente cursadas no primeiro, segundo e terceiro quadrimestres acadêmicos.\n- 4 unidades de crédito serão atribuídas à apresentação e aprovação do Exame de Qualificação pela Banca Examinadora.\n- 12 unidades de crédito são atribuídas à Defesa Pública e aprovação pela Banca Examinadora da Dissertação de Mestrado, totalizando os 40 créditos mínimos requeridos."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#saber-duração && @programa:Mestrado",
+      "dialog_node": "node_8_1632963768035",
+      "previous_sibling": "node_8_1632359100036"
+    },
+    {
+      "type": "standard",
+      "title": "saber_processo_de_matricula",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "As inscrições são feitas via e-mail mailto:ipgss@fei.edu.br, mediante o envio eletrônico dos documentos solicitados:\nDuas cartas de recomendação (doc)\nCópia do diploma do Curso Superior devidamente registrado ou equivalente\nCópia do Histórico Escolar do Curso Superior\nCópia do RG - não é aceita a CNH\nCópia do CPF ou apresentar o Comprovante de Inscrição (Acesse o site da Receita Federal)\nCópia da Certidão de Nascimento ou Casamento\nCópia do comprovante de residência\nCurriculum Vitae atualizado\nUma foto recente.\nApós as inscrições, os interessados são convocados para entrevistas e caso sejam aceitos, confirmam sua entrada no Programa de Pós-Graduação da FEI."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1633386015182"
+      },
+      "conditions": "#info_matricula",
+      "dialog_node": "node_8_1633384467409",
+      "previous_sibling": "node_4_1633384431290"
+    },
+    {
+      "type": "slot",
+      "parent": "node_8_1632359100036",
+      "variable": "$programa",
+      "dialog_node": "slot_9_1632962860473"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "Aula 1",
+  "language": "pt-br",
+  "description": ""
+}
